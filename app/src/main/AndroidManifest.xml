@@ -10,7 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IC206IECIREOL">
         <activity
-            android:name=".MainActivity"
+            android:name=".QueryEvaluationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DetailEvaluationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RegisterEvaluationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,6 +27,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>

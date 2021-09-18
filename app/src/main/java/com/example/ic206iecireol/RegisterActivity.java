@@ -5,27 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
-    private Button btnLogout;
+    private Button btnRegister, btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
 
-        btnLogout = findViewById(R.id.activity_main_btn_logout);
+        btnRegister = findViewById(R.id.activity_register_btn_register);
+        btnLogin = findViewById(R.id.activity_register_btn_login);
 
-        btnLogout.setOnClickListener(view -> {
-            Toast.makeText(view.getContext(), "Cerrando Sesión", Toast.LENGTH_SHORT).show();
+        btnLogin.setOnClickListener(view -> {
             Intent i = new Intent(view.getContext(), LoginActivity.class);
             startActivity(i);
             finish();
-        } );
-
-
+        });
 
     }
 }
