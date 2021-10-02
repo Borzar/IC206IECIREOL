@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.ic206iecireol.controllers.AuthController;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.regex.Pattern;
@@ -54,15 +55,12 @@ public class LoginActivity extends AppCompatActivity {
                     tilPassword.setErrorEnabled(false);
                 }
 
-                if (password.equals("1234") && userValid && passwordValid) {
-                   Toast.makeText(view.getContext(), String.format("Bienvenido %s", user), Toast.LENGTH_SHORT).show();
-                   Intent i = new Intent(view.getContext(), MainActivity.class);
-                   startActivity(i);
-                   finish();
+                if (userValid && passwordValid) {
+                    AuthController controller = new AuthController(view.getContext());
+                    controller.login(user, password);
                 } else {
-                   Toast.makeText(view.getContext(), String.format("La contraseña es incorrecta", user), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "Campos inválidos", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 
