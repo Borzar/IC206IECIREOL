@@ -10,7 +10,7 @@ public class User {
     private String lastName;
     private Date birthDate;
     private String height;
-    private String Password;
+    private String password;
 
     public User(String firsName, String userName, String lastName, Date birthDate, String height) {
         this.firsName = firsName;
@@ -49,11 +49,11 @@ public class User {
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-       this.Password = Password;
+       this.password = password;
     }
 
 }

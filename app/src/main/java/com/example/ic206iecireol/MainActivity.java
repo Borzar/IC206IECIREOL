@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ic206iecireol.controllers.AuthController;
 import com.example.ic206iecireol.models.Evaluation;
+import com.example.ic206iecireol.models.User;
 import com.example.ic206iecireol.ui.DatePickerFragment;
 import com.example.ic206iecireol.ui.EvaluationAdapter;
 import com.google.android.material.textfield.TextInputLayout;
@@ -19,9 +22,11 @@ import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private TextView tvTitle;
     private TextInputLayout tilFrom, tilTo;
     private ListView lvAllEvaluations;
     private Button btnLogout;
+    private AuthController authController;
 
     private List<Evaluation> evaluationList = new ArrayList<>();
 
@@ -30,10 +35,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        authController = new AuthController(this);
+
+        tvTitle = findViewById(R.id.activity_main_tv_title);
         tilFrom = findViewById(R.id.activity_main_til_from);
         tilTo = findViewById(R.id.activity_main_til_to);
         lvAllEvaluations = findViewById(R.id.activity_main_lv_all_evaluations);
         btnLogout = findViewById(R.id.activity_main_btn_logout);
+
+        User user = authController.getUserSession();
+
+        tvTitle.setText(String.format("Evaluacion de %s", user.getFirsName()));
 
         tilTo.getEditText().setOnClickListener(view -> {
             DatePickerFragment.showDatePickerDialog(this, tilTo, new Date());
@@ -61,14 +73,6 @@ public class MainActivity extends AppCompatActivity {
             view.getContext().startActivity(i);
         } ));
 
-        btnLogout.setOnClickListener(view -> {
-            Toast.makeText(view.getContext(), "Cerrando Sesión", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(view.getContext(), LoginActivity.class);
-            startActivity(i);
-            finish();
-        } );
-
-
-
+        btnLogout.setOnClickListener(view -> { authController.logout(); });
     }
 }

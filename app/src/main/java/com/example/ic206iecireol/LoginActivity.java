@@ -15,15 +15,18 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
-
     private Button btnLogin, btnRegister;
     private TextInputLayout tilUser, tilPassword;
-
+    private AuthController authController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        authController = new AuthController(this);
+        authController.checkUserSession();
+
 
         btnLogin = findViewById(R.id.activity_login_btn_login);
         btnRegister = findViewById(R.id.activity_login_btn_register);
@@ -56,8 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (userValid && passwordValid) {
-                    AuthController controller = new AuthController(view.getContext());
-                    controller.login(user, password);
+                    authController.login(user, password);
                 } else {
                     Toast.makeText(view.getContext(), "Campos inválidos", Toast.LENGTH_SHORT).show();
                 }
