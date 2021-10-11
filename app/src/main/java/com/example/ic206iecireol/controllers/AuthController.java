@@ -8,8 +8,12 @@ import android.widget.Toast;
 
 import com.example.ic206iecireol.LoginActivity;
 import com.example.ic206iecireol.MainActivity;
+import com.example.ic206iecireol.dao.UserDao;
 import com.example.ic206iecireol.lib.BCrypt;
+import com.example.ic206iecireol.lib.GymAppDatabase;
 import com.example.ic206iecireol.models.User;
+import com.example.ic206iecireol.models.UserEntity;
+import com.example.ic206iecireol.models.UserMapper;
 
 import java.util.Date;
 
@@ -20,6 +24,7 @@ public class AuthController {
     private final String KEY_LAST_NAME = "userLastName";
     private final String KEY_HEIGHT = "userHeight";
 
+    private UserDao userDao;
     private Context ctx;
     private SharedPreferences preferences;
 
@@ -28,6 +33,7 @@ public class AuthController {
         int PRIVATE_MODE = 0;
         String PREF_NAME = "AppGymPref";
         this.preferences = ctx.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+        this.userDao = GymAppDatabase.getInstance(ctx).userDao();
     }
 
     private void setUserSession(User user) {
@@ -67,7 +73,8 @@ public class AuthController {
         String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
         user.setPassword(hashedPassword);
 
-        // implementar el registro en Base de datos
+        UserEntity userEntity = new UserMapper(user).toEntity();
+        userDao.insert(userEntity);
 
         Toast.makeText(ctx, String.format("Usuario %s registrado", user.getUserName()), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(ctx, LoginActivity.class);
@@ -75,9 +82,10 @@ public class AuthController {
     }
 
     public void login(String user, String password) {
-        User userLogin = new User("Boris", "Boris", "Zarate", new Date(), "70");
-        userLogin.setPassword("$2a$10$cgxAMC6njcegN4pcNEqKAuNYe2PVn892SrJomvP2m9Gy.n6/Di6.W");
-        userLogin.setId(1);
+        UserEntity userEntity = userDao.findByUserName(user);
+        User userLogin = new UserMapper(userEntity).toBase();
+
+
         if (BCrypt.checkpw(password, userLogin.getPassword())) {
             setUserSession(userLogin);
             Toast.makeText(ctx, String.format("Bienvenido %s", user), Toast.LENGTH_SHORT).show();
