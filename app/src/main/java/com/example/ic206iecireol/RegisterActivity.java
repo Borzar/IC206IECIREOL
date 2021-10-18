@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.ic206iecireol.controllers.AuthController;
 import com.example.ic206iecireol.models.User;
 import com.example.ic206iecireol.ui.DatePickerFragment;
 import com.google.android.material.textfield.TextInputLayout;
@@ -58,6 +59,10 @@ public class RegisterActivity extends AppCompatActivity {
 
             User user = new User(userName, firstName, lastName, birthdayDate, height);
             user.setPassword(password);
+
+            AuthController controller = new AuthController(view.getContext());
+            controller.register(user);
+
         });
     
 

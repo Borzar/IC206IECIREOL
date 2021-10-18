@@ -83,6 +83,12 @@ public class AuthController {
 
     public void login(String user, String password) {
         UserEntity userEntity = userDao.findByUserName(user);
+
+        if (userEntity == null) {
+            Toast.makeText(ctx, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         User userLogin = new UserMapper(userEntity).toBase();
 
 
