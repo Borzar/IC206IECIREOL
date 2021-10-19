@@ -11,7 +11,7 @@ import com.example.ic206iecireol.models.Evaluation;
 
 public class DetailEvaluationActivity extends AppCompatActivity {
     private TextView tvId, tvDate, tvWeight, tvImc;
-    private Button btnDelete;
+    private Button btnDelete, btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +21,18 @@ public class DetailEvaluationActivity extends AppCompatActivity {
         Evaluation evaluation = (Evaluation) getIntent().getSerializableExtra("evaluation");
 
         tvId = findViewById(R.id.activity_detail_evaluation_tv_id);
+        tvDate = findViewById(R.id.activity_detail_evaluation_tv_date);
+        tvWeight = findViewById(R.id.activity_detail_evaluation_tv_weight);
+        btnBack = findViewById(R.id.activity_detail_evaluation_btn_back);
+        btnDelete = findViewById(R.id.activity_detail_evaluation_btn_delete);
 
         tvId.setText(Long.toString(evaluation.getId()));
+        tvDate.setText(evaluation.getStringDate());
+        tvWeight.setText(Double.toString(evaluation.getWeight()));
+
+        btnBack.setOnClickListener(view -> {
+            super.onBackPressed();
+        });
 
     }
 

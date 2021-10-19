@@ -1,6 +1,7 @@
 package com.example.ic206iecireol.models;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Evaluation implements Serializable {
@@ -39,4 +40,11 @@ public class Evaluation implements Serializable {
     public void setWeight(double weight) {
         this.weight = weight;
     }
+
+    public String getStringDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return formatter.format(date);
+    }
+
+
 }

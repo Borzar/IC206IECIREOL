@@ -52,13 +52,12 @@ public class EvaluationAdapter extends BaseAdapter {
         TextView tvDate= view.findViewById(R.id.item_evaluation_tv_date);
         TextView tvImc = view.findViewById(R.id.item_evaluation_tv_imc);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
 
         tvId.setText(Long.toString(evaluation.getId()));
-        tvDate.setText(dateFormat.format(evaluation.getDate()));
         tvWeight.setText(Double.toString(evaluation.getWeight()));
         tvImc.setText(Double.toString(evaluation.getWeight() / (1.69 * 1.69)));
-
+        tvDate.setText(String.format("Fecha Evaluacion: %s", evaluation.getStringDate()));
 
         return view;
     }
