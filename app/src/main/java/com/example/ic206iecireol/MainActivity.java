@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ic206iecireol.controllers.AuthController;
+import com.example.ic206iecireol.controllers.EvaluationController;
 import com.example.ic206iecireol.models.Evaluation;
 import com.example.ic206iecireol.models.User;
 import com.example.ic206iecireol.ui.DatePickerFragment;
@@ -25,10 +26,11 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvTitle;
     private TextInputLayout tilFrom, tilTo;
     private ListView lvAllEvaluations;
-    private Button btnLogout;
+    private Button btnLogout, btnNewEvaluation;
     private AuthController authController;
+    private EvaluationController evaluationController;
 
-    private List<Evaluation> evaluationList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,31 +38,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         authController = new AuthController(this);
+        evaluationController = new EvaluationController(this);
+
 
         tvTitle = findViewById(R.id.activity_main_tv_title);
         tilFrom = findViewById(R.id.activity_main_til_from);
         tilTo = findViewById(R.id.activity_main_til_to);
         lvAllEvaluations = findViewById(R.id.activity_main_lv_all_evaluations);
         btnLogout = findViewById(R.id.activity_main_btn_logout);
+        btnNewEvaluation = findViewById(R.id.activity_main_btn_new_evaluation);
 
         User user = authController.getUserSession();
 
         tvTitle.setText(String.format("Evaluacion de %s", user.getFirsName()));
 
-        tilTo.getEditText().setOnClickListener(view -> {
-            DatePickerFragment.showDatePickerDialog(this, tilTo, new Date());
-        });
-
-        tilFrom.getEditText().setOnClickListener(view -> {
-            DatePickerFragment.showDatePickerDialog(this, tilFrom, new Date());
-        });
-
-        for (int x = 0; x < 10; ++x) {
-            Evaluation newEvaluation = new Evaluation(x, new Date(), 65);
-            newEvaluation.setId(x);
-            evaluationList.add(newEvaluation);
-        }
-
+        List<Evaluation> evaluationList = evaluationController.getAll();
         EvaluationAdapter adapter = new EvaluationAdapter(this, evaluationList);
 
         lvAllEvaluations.setAdapter(adapter);
@@ -73,6 +65,28 @@ public class MainActivity extends AppCompatActivity {
             view.getContext().startActivity(i);
         } ));
 
+        btnNewEvaluation.setOnClickListener(view -> {
+            Intent i = new Intent(view.getContext(), NewEvaluationActivity.class);
+            view.getContext().startActivity(i);
+        });
+
         btnLogout.setOnClickListener(view -> { authController.logout(); });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<Evaluation> evaluationList = evaluationController.getAll();
+        EvaluationAdapter adapter = new EvaluationAdapter(this, evaluationList);
+
+        lvAllEvaluations.setAdapter(adapter);
+
+        lvAllEvaluations.setOnItemClickListener(((adapterView, view, index, id) -> {
+            Evaluation evaluation = evaluationList.get(index);
+
+            Intent i = new Intent(view.getContext(), DetailEvaluationActivity.class);
+            i.putExtra("evaluation", evaluation);
+            view.getContext().startActivity(i);
+        } ));
     }
 }

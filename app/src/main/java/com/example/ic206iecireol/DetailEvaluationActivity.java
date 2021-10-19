@@ -2,11 +2,14 @@ package com.example.ic206iecireol;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.ic206iecireol.controllers.EvaluationController;
 import com.example.ic206iecireol.models.Evaluation;
 
 public class DetailEvaluationActivity extends AppCompatActivity {
@@ -29,6 +32,12 @@ public class DetailEvaluationActivity extends AppCompatActivity {
         tvId.setText(Long.toString(evaluation.getId()));
         tvDate.setText(evaluation.getStringDate());
         tvWeight.setText(Double.toString(evaluation.getWeight()));
+
+
+        btnDelete.setOnClickListener(view -> {
+            EvaluationController controller = new EvaluationController(view.getContext());
+            controller.delete(evaluation.getId());
+        });
 
         btnBack.setOnClickListener(view -> {
             super.onBackPressed();

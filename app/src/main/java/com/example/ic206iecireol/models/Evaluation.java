@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Evaluation implements Serializable {
+public class Evaluation implements Serializable, IEvaluation {
 
     private long id;
     private Date date;
@@ -15,6 +15,9 @@ public class Evaluation implements Serializable {
         this.id = id;
         this.date = date;
         this.weight = weight;
+    }
+
+    public Evaluation() {
     }
 
     public long getId() {
