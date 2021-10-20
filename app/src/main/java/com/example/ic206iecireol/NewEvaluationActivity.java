@@ -7,8 +7,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ic206iecireol.controllers.AuthController;
 import com.example.ic206iecireol.controllers.EvaluationController;
 import com.example.ic206iecireol.models.Evaluation;
+import com.example.ic206iecireol.models.User;
 import com.example.ic206iecireol.ui.DatePickerFragment;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -50,7 +52,11 @@ public class NewEvaluationActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            Evaluation evaluation = new Evaluation();
+            AuthController authController = new AuthController(view.getContext());
+
+            User user = authController.getUserSession();
+
+            Evaluation evaluation = new Evaluation(evDate, Double.parseDouble(weight), user.getId());
 
             EvaluationController controller = new EvaluationController(view.getContext());
             controller.register(evaluation);

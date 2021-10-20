@@ -9,17 +9,16 @@ public class Evaluation implements Serializable, IEvaluation {
     private long id;
     private Date date;
     private double weight;
+    private long userId;
 
 
-    public Evaluation(long id, Date date, double weight) {
-        this.id = id;
+    public Evaluation(Date date, Double weight, long userId) {
         this.date = date;
         this.weight = weight;
+        this.userId = userId;
     }
 
-    public Evaluation() {
-    }
-
+    @Override
     public long getId() {
         return id;
     }
@@ -28,6 +27,7 @@ public class Evaluation implements Serializable, IEvaluation {
         this.id = id;
     }
 
+    @Override
     public Date getDate() {
         return date;
     }
@@ -36,12 +36,20 @@ public class Evaluation implements Serializable, IEvaluation {
         this.date = date;
     }
 
+    @Override
     public double getWeight() {
         return weight;
     }
 
+
+
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public long getUserId() {
+        return userId;
     }
 
     public String getStringDate() {

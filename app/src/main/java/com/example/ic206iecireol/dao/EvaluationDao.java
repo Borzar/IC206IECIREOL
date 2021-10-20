@@ -7,12 +7,16 @@ import androidx.room.Query;
 import com.example.ic206iecireol.models.EvaluationEntity;
 import com.example.ic206iecireol.models.UserEntity;
 
+import java.util.Date;
 import java.util.List;
 
 @Dao
 public interface EvaluationDao {
-    @Query("SELECT id, date, weight FROM evaluations")
-    List<EvaluationEntity> findAll ();
+    @Query("SELECT id, date, weight, user_id FROM evaluations WHERE user_id = :userId")
+    List<EvaluationEntity> findAll(long userId);
+
+    @Query("SELECT id, date, weight, user_id FROM evaluations WHERE user_id = :userId AND date BETWEEN :from AND :to")
+    List<EvaluationEntity> findByRange (Date from, Date to, long userId);
 
     @Insert
     long insert(EvaluationEntity evaluation);

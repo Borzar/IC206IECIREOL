@@ -20,9 +20,10 @@
                 android:text="Mis Evaluaciones"
                 android:textSize="24sp" />
 
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -34,8 +35,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginRight="2dp"
                         android:focusable="false"
                         android:hint="Desde" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -43,29 +43,39 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/activity_main_til_to"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginRight="4dp"
                         android:focusable="false"
                         android:hint="Hasta" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/activity_main_btn_filter"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    android:text="Filtrar" />
+
             </LinearLayout>
 
-            <Button
-                android:id="@+id/activity_main_btn_filter"
+            <TextView
+                android:id="@+id/activity_main_tv_clear_filter"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="8dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
                 android:layout_weight="1"
-                android:text="Filtrar" />
+                android:text="Limpiar filtro"
+                android:textColor="#673AB7" />
 
             <ListView
                 android:id="@+id/activity_main_lv_all_evaluations"

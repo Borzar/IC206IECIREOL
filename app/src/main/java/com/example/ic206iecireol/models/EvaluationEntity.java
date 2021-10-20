@@ -18,10 +18,14 @@ public class EvaluationEntity implements IEvaluation {
     @ColumnInfo(name = "weight")
     private Double weight;
 
-    public EvaluationEntity(long id, Date date, Double weight) {
+    @ColumnInfo(name = "user_id")
+    private long userId;
+
+    public EvaluationEntity(long id, Date date, Double weight, long userId) {
         this.id = id;
         this.date = date;
         this.weight = weight;
+        this.userId = userId;
     }
 
     @Override
@@ -37,5 +41,10 @@ public class EvaluationEntity implements IEvaluation {
     @Override
     public double getWeight() {
         return weight;
+    }
+
+    @Override
+    public long getUserId() {
+        return userId;
     }
 }

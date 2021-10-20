@@ -9,9 +9,9 @@ public class EvaluationMapper {
 
     public Evaluation toBase() {
         Evaluation baseEvaluation = new Evaluation(
-                this.evaluation.getId(),
                 this.evaluation.getDate(),
-                this.evaluation.getWeight()
+                this.evaluation.getWeight(),
+                this.evaluation.getUserId()
         );
         baseEvaluation.setId(this.evaluation.getId());
         return baseEvaluation;
@@ -21,7 +21,8 @@ public class EvaluationMapper {
         return new EvaluationEntity(
                 this.evaluation.getId(),
                 this.evaluation.getDate(),
-                this.evaluation.getWeight()
+                this.evaluation.getWeight(),
+                this.evaluation.getUserId()
         );
     }
 }

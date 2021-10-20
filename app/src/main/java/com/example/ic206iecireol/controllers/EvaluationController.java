@@ -12,6 +12,7 @@ import com.example.ic206iecireol.lib.GymAppDatabase;
 import com.example.ic206iecireol.models.Evaluation;
 import com.example.ic206iecireol.models.EvaluationEntity;
 import com.example.ic206iecireol.models.EvaluationMapper;
+import com.example.ic206iecireol.models.User;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,7 +60,24 @@ public class EvaluationController {
     }
 
     public List<Evaluation> getAll() {
-        List<EvaluationEntity> evaluationEntityList = evaluationDao.findAll();
+        AuthController authController = new AuthController(ctx);
+        User user = authController.getUserSession();
+        List<EvaluationEntity> evaluationEntityList = evaluationDao.findAll(user.getId());
+        List<Evaluation> evaluationList = new ArrayList<>();
+
+        for (EvaluationEntity evaluationEntity : evaluationEntityList) {
+            EvaluationMapper mapper = new EvaluationMapper(evaluationEntity);
+            Evaluation evaluation = mapper.toBase();
+            evaluationList.add(evaluation);
+        }
+
+        return evaluationList;
+    }
+
+    public List<Evaluation> getRange(Date from, Date to) {
+        AuthController authController = new AuthController(ctx);
+        User user = authController.getUserSession();
+        List<EvaluationEntity> evaluationEntityList = evaluationDao.findByRange(from, to, user.getId());
         List<Evaluation> evaluationList = new ArrayList<>();
 
         for (EvaluationEntity evaluationEntity : evaluationEntityList) {
