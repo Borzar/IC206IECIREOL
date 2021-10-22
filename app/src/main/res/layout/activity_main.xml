@@ -80,14 +80,13 @@
             <ListView
                 android:id="@+id/activity_main_lv_all_evaluations"
                 android:layout_width="match_parent"
-                android:layout_height="501dp"
-                android:layout_weight="1">
-            </ListView>
+                android:layout_height="396dp"
+                android:layout_weight="1"></ListView>
 
             <Button
                 android:id="@+id/activity_main_btn_new_evaluation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="nueva evaluacion" />
 
             <Button
