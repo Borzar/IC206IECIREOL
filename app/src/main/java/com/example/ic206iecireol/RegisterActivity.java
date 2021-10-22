@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            User user = new User(userName, firstName, lastName, birthdayDate, height);
+            User user = new User(userName, firstName, lastName, birthdayDate, Double.parseDouble(height));
             user.setPassword(password);
 
             AuthController controller = new AuthController(view.getContext());

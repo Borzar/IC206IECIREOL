@@ -25,12 +25,12 @@ public class UserEntity implements IUser{
     private Date birthDate;
 
     @ColumnInfo(name = "height")
-    private String height;
+    private double height;
 
     @ColumnInfo(name = "password")
     private String password;
 
-    public UserEntity(long id, String firsName, String userName, String lastName, Date birthDate, String height, String password) {
+    public UserEntity(long id, String firsName, String userName, String lastName, Date birthDate, double height, String password) {
         this.id = id;
         this.firsName = firsName;
         this.userName = userName;
@@ -60,7 +60,7 @@ public class UserEntity implements IUser{
         return birthDate;
     }
 
-    public String getHeight() {
+    public double getHeight() {
         return height;
     }
 

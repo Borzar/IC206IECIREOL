@@ -9,10 +9,10 @@ public class User implements IUser{
     private String userName;
     private String lastName;
     private Date birthDate;
-    private String height;
+    private double height;
     private String password;
 
-    public User(String firsName, String userName, String lastName, Date birthDate, String height) {
+    public User(String firsName, String userName, String lastName, Date birthDate, double height) {
         this.firsName = firsName;
         this.userName = userName;
         this.lastName = lastName;
@@ -44,8 +44,12 @@ public class User implements IUser{
         return birthDate;
     }
 
-    public String getHeight() {
+    public double getHeight() {
         return height;
+    }
+
+    public String getHeightString() {
+        return Double.toString(height);
     }
 
     public String getPassword() {

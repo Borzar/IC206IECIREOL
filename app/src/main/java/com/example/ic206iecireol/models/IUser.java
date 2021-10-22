@@ -13,7 +13,7 @@ public interface IUser {
 
     Date getBirthDate();
 
-    String getHeight();
+    double getHeight();
 
     String getPassword();
 }

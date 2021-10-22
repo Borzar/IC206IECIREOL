@@ -12,6 +12,7 @@ public class Evaluation implements Serializable, IEvaluation {
     private long userId;
 
 
+
     public Evaluation(Date date, Double weight, long userId) {
         this.date = date;
         this.weight = weight;
@@ -41,7 +42,13 @@ public class Evaluation implements Serializable, IEvaluation {
         return weight;
     }
 
+    public double calculateImc (double height) {
+        return weight / (height * height);
+    }
 
+    public String calculateImcString(double height) {
+        return Double.toString(calculateImc(height));
+    }
 
     public void setWeight(double weight) {
         this.weight = weight;

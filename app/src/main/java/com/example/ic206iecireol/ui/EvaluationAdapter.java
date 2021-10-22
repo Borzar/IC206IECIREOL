@@ -11,7 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.example.ic206iecireol.R;
+import com.example.ic206iecireol.controllers.AuthController;
 import com.example.ic206iecireol.models.Evaluation;
+import com.example.ic206iecireol.models.User;
 
 import java.util.List;
 
@@ -45,6 +47,9 @@ public class EvaluationAdapter extends BaseAdapter {
 
         view = inflater.inflate(R.layout.item_evaluation, null);
 
+        AuthController authController = new AuthController(view.getContext());
+        User user = authController.getUserSession();
+
         Evaluation evaluation = evaluationList.get(i);
 
         TextView tvId= view.findViewById(R.id.item_evaluation_tv_id);
@@ -52,11 +57,9 @@ public class EvaluationAdapter extends BaseAdapter {
         TextView tvDate= view.findViewById(R.id.item_evaluation_tv_date);
         TextView tvImc = view.findViewById(R.id.item_evaluation_tv_imc);
 
-
-
         tvId.setText(Long.toString(evaluation.getId()));
         tvWeight.setText(Double.toString(evaluation.getWeight()));
-        tvImc.setText(Double.toString(evaluation.getWeight() / (1.69 * 1.69)));
+        tvImc.setText(evaluation.calculateImcString(user.getHeight()));
         tvDate.setText(String.format("Fecha Evaluacion: %s", evaluation.getStringDate()));
 
         return view;

@@ -42,7 +42,7 @@ public class AuthController {
         editor.putString(KEY_USER, user.getUserName());
         editor.putString(KEY_FIRST_NAME, user.getFirsName());
         editor.putString(KEY_LAST_NAME, user.getLastName());
-        editor.putString(KEY_HEIGHT, user.getHeight());
+        editor.putString(KEY_HEIGHT, user.getHeightString());
         editor.apply();
     }
 
@@ -51,7 +51,9 @@ public class AuthController {
         String firstName = preferences.getString(KEY_FIRST_NAME, "");
         String lastName = preferences.getString(KEY_LAST_NAME, "");
         String userName = preferences.getString(KEY_USER, "");
-        String height = preferences.getString(KEY_HEIGHT, "");
+        String heightStr = preferences.getString(KEY_HEIGHT, "");
+
+        double height = Double.parseDouble(heightStr);
 
         User userSesion = new User(firstName, lastName, userName, new Date(), height);
         userSesion.setId(id);
